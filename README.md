@@ -15,6 +15,7 @@ $ git clone https://github.com/allenRoyston/vue-project.git
 $ cd vue-project
 $ npm install 
 $ npm run dev
+$ // open browser at http://localhost:1234
 ```
 - Please note that Parcel should find any additional requirements and install them automatically.  If it lags out, just quit and restart.  
 
