@@ -17,7 +17,6 @@ $ npm install
 $ npm run dev
 $ // open browser at http://localhost:1234
 ```
-- Please note that Parcel should find any additional requirements and install them automatically.  If it lags out, just quit and restart.  
 
 ## Unit testing
 Make sure Jest is installed globally before running unit tests.
