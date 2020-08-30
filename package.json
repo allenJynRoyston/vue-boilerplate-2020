@@ -9,9 +9,14 @@
   },
   "devDependencies": {
     "@babel/core": "^7.11.4",
+    "@vue/cli": "^4.5.4",
+    "@vue/cli-plugin-unit-jest": "^4.5.4",
     "@vue/component-compiler-utils": "^3.2.0",
+    "@vue/test-utils": "^1.0.5",
+    "axios": "^0.20.0",
     "parcel": "^1.12.4",
     "pug": "^3.0.0",
+    "sass": "^1.26.10",
     "vue": "^2.6.12",
     "vue-template-compiler": "^2.6.12",
     "vuex": "^3.5.1"
@@ -22,7 +27,7 @@
     ]
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "dev": "parcel index.html",
     "build": "parcel build index.html"
   },

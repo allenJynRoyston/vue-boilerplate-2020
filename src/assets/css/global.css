@@ -1,3 +1,11 @@
 /*  NORMALIZE AND SKELETON CSS FOR BASIC STYLES */
 @import './normalize.css';
 @import './skeleton.css';
+
+h1, h2, h3, h4, h5, h6{    
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+body, p, a, span{
+  font-family: 'Roboto Slab', serif;   
+}
