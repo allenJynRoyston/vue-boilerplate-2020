@@ -1,14 +1,18 @@
 <template lang='pug'>
   header.header
-    h1 {{headerValue}}
+    h1 {{data.value}}
 </template>
 
 <script>
 export default {
   props: {
-    headerValue:{
-      type: String,
-      default: "Header"
+    data:{
+      type: Object,
+      default: function () {
+        return {
+          value: 'Header'
+        }
+      }
     }
   }
 }

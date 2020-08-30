@@ -1,6 +1,6 @@
 <template lang='pug' >
   #app
-    Header(:headerValue='"Url Shortening Demo"')
+    Header(:data={value: "Url Shortening Demo!"})
     router-view
     Footer
 </template>
