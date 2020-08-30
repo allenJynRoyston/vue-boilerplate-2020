@@ -1,6 +1,6 @@
 <template lang="pug"> 
   .home-container    
-    SplitInput(:label='configuration.label' :placeholder='configuration.placeholder' :defaultVal='configuration.defaultValue' :busy='configuration.busy' :onclick='submitUrl' :onupdate='inputUpdate')     
+    SplitInput(:configuation='configuration' :onclick='submitUrl' :onupdate='inputUpdate')     
     ListResults(v-if='!!result' :data='result' :onbuttonclick='showCopySplash' :onclear='clearResults')
     
     section(v-if='!configuration.busy')

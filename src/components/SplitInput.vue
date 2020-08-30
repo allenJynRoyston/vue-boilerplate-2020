@@ -1,15 +1,26 @@
 <template lang='pug'>
   .splitbtn-container
-    label {{label}}
-    .button-container
-      input(v-model='value' :placeholder='placeholder' v-bind:class="{ disabled: busy }" v-on:keyup.enter='onclick' @keyup='() => {onupdate(this.value)}')
-      button.submit(:disabled='busy' v-on:click='onclick')
-        span {{busy ? buttonBusy : buttonActive}}        
+    label {{configuation.label}}
+    .button-container      
+      input(v-model='value' :placeholder='configuation.placeholder' v-bind:class="{ disabled: configuation.busy }" v-on:keyup.enter='onclick' @keyup='() => {onupdate(this.value)}')
+      button.submit(:disabled='configuation.busy' v-on:click='onclick')
+        span {{configuation.busy ? buttonBusy : buttonActive}}        
 </template>
 
 <script>
 export default {
   props: {
+    configuation: {
+      type: Object,
+      default: () => {
+        return {
+          label: 'Input a valid url:',
+          placeholder: 'https://www.example.com',
+          defaultValue: 'https://www.example.com',
+          busy: false
+        } 
+      }
+    },
     buttonActive: {
       type: String,
       default: "Submit"
@@ -17,23 +28,7 @@ export default {
     buttonBusy:{
       type: String,
       default: "Wait please"
-    },
-    label: {
-      type: String, 
-      default: "Enter a value"
     },    
-    defaultVal: {
-      type: String,
-      default: ""
-    },
-    placeholder: {
-      type: String, 
-      default: ""
-    },
-    busy: {
-      type: Boolean,
-      default: false
-    },
     onclick: {
       type: Function,
       default: () => {}
@@ -49,9 +44,9 @@ export default {
     }
   },
   created: function(){
-    const {defaultVal} = this.$props
-    this.value = defaultVal
-    this.onupdate(defaultVal)
+    const {defaultValue} = this.$props.configuation
+    this.value = defaultValue
+    this.onupdate(defaultValue)
   }
 }
 </script>
