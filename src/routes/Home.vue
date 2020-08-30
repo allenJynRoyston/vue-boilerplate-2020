@@ -1,13 +1,14 @@
 <template lang="pug"> 
-  .content    
+  .home-container    
     SplitInput(:label='configuration.label' :placeholder='configuration.placeholder' :defaultVal='configuration.defaultValue' :busy='configuration.busy' :onclick='submitUrl' :onupdate='inputUpdate')     
-    ListResults(v-if='!!result' :data='result' :onbuttonclick='showCopySplash')
+    ListResults(v-if='!!result' :data='result' :onbuttonclick='showCopySplash' :onclear='clearResults')
     
-    .error-container
-      p.error(v-if='error.state') {{error.reason}}
-      a.error(v-if='error.state' href='https://api.shrtco.de/v2/shorten?url=https://www.google.com' target='_blank') Click here to check if the service is down.
-    .options-container(v-if='error.allowForce')
-      a.showmore(v-on:click='forceResults') Ugh fine, show me some dummy data then.
+    section(v-if='!configuration.busy')
+      .error-container
+        p.error(v-if='error.state') {{error.reason}}
+        a.error(v-if='error.state' href='https://api.shrtco.de/v2/shorten?url=https://www.google.com' target='_blank') Click here to check if the service is down.
+      .options-container(v-if='error.allowForce')
+        a.showmore(v-on:click='forceResults') Ugh fine, show me some dummy data then.
 </template>
 
 <script>
@@ -28,7 +29,6 @@ export default {
         allowForce: false
       },
       url: '',
-      busy: false,      
       result: null
     }
   },
@@ -39,6 +39,9 @@ export default {
         reason,
         allowForce
       }      
+    },
+    clearResults(){
+      this.result = null
     },
     inputUpdate(val) {
       this.url = val
@@ -54,26 +57,30 @@ export default {
       this.configuration.busy = state
     },
     async submitUrl() {
-      const {setError, url, validateUrl, setBusy} = this      
-      // check if url is valid
-      if(url.length < 6 || !validateUrl(url)){
-        setError({state: true, reason: 'Must be a valid url'})                
-      }
-      // if it is
-      else{
-        setBusy(true)
-        try{
-          const {data} = await axios.get(`https://api.shrtco.de/v2/shorten?url=${url}`)
-          const {ok, result = null} = data                  
-          // set error state (if applicable)
-          setError(ok ? {state: false, reason: null} : {state: true, reason: 'Problem with url - please try again later'})                
-          // bind results
-          this.result = result          
-        } catch (err) {
-          // if service is down, allow force option
-          setError({state: true, reason: 'Problem with service - please try again later.', allowForce: true})        
+      const {configuration, url, validateUrl, setBusy, setError} = this      
+
+      if(!configuration.busy){
+        // check if url is valid
+        if(url.length < 6 || !validateUrl(url)){
+          setError({state: true, reason: 'Must be a valid url'})             
+          this.result = null           
         }
-        setBusy(false)   
+        // if it is
+        else{
+          setBusy(true)
+          try{
+            const {data} = await axios.get(`https://api.shrtco.de/v2/shorten?url=${url}`)
+            const {ok, result = null} = data                  
+            // set error state (if applicable)
+            setError(ok ? {state: false, reason: null} : {state: true, reason: 'Problem with url - please try again later'})                
+            // bind results
+            this.result = result          
+          } catch (err) {
+            // if service is down, allow force option
+            setError({state: true, reason: 'Problem with service - please try again later.', allowForce: true})        
+          }
+          setBusy(false)   
+        }
       }
 
     },
@@ -96,9 +103,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .content{
-    display: block;    
+  .home-container{
+    display: flex;    
+    flex-direction: column;
+    margin: auto;
     min-height: 100vh;
+    max-width: calc(1200px - 200px);
     padding: 50px 100px;    
   }
 

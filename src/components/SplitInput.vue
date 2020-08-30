@@ -1,8 +1,8 @@
 <template lang='pug'>
-  .container
+  .splitbtn-container
     label {{label}}
     .button-container
-      input(v-model='value' :placeholder='placeholder' v-bind:class="{ disabled: busy }" @keyup='() => {onupdate(this.value)}')
+      input(v-model='value' :placeholder='placeholder' v-bind:class="{ disabled: busy }" v-on:keyup.enter='onclick' @keyup='() => {onupdate(this.value)}')
       button.submit(:disabled='busy' v-on:click='onclick')
         span(v-if='busy') Wait please
         span(v-else) Submit
@@ -50,7 +50,7 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-  .container{
+  .splitbtn-container{
     display: inline-block;
     width: 100%;
   }
@@ -77,6 +77,7 @@ export default {
   button{
     border-radius: 0;
     transform: translateY(-1px);
+    width: 200px;
 
     &:disabled{
       cursor: not-allowed;
