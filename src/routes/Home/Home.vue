@@ -1,5 +1,5 @@
-<template lang="pug">
-  h1 Allen Royston
+<template lang="pug">  
+    span Allen Royston  
 </template>
 
 <script>
@@ -14,7 +14,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .columns{
-    border: 1px solid red;
-  }
+
 </style>

@@ -1,18 +1,10 @@
-<template lang="pug">
-  .header
-    span Header
+<template>
+  <div>
+    <span> Header </span>
+  </div>
 </template>
 
 <script>
 
 </script>
 
-
-<style lang="scss" scoped>
-  .header{
-    padding: 20px;
-    overflow: hidden;
-    background-color: black;
-    color: white;
-  }
-</style>

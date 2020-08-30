@@ -1,6 +1,7 @@
-<template lang="pug">
-  #footer
-    span Footer
+<template>
+  <div>
+    <span> Footer </span>
+  </div>
 </template>
 
 <script>
@@ -8,12 +9,3 @@
 </script>
 
 
-<style lang="scss" scoped>
-  #footer{
-    padding: 20px;
-    overflow: hidden;
-    background-color: black;
-    color: white;
-    margin-top: 20px;
-  }
-</style>
