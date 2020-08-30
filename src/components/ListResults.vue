@@ -1,18 +1,30 @@
 <template lang='pug'>
   div
     .label-container
-      label Results: 
-      a(v-on:click='onclear') Clear
+      label {{label}} 
+      a(v-on:click='onclear') {{clearValue}}
     .list-results                  
       .item(v-for="(value, key) in data")
         .key {{sanitize(key)}}:
-        .value {{value}}
-        button.copy-btn(v-on:click='() => {copyToClipboard(value)}') Copy
+        .value(v-on:click='() => {copyToClipboard(value)}') {{value}}
+        button.copy-btn(v-on:click='() => {copyToClipboard(value)}') {{buttonValue}}
 </template>
 
 <script>
 export default {
     props: {
+      label:{
+        type: String,
+        default: "Results:"
+      }, 
+      clearValue:{
+        type: String,
+        default: "Clear"
+      },   
+      buttonValue:{
+        type: String,
+        default: "Copy"
+      },                  
       data: {
         type: Object,
         default: function () {
@@ -32,13 +44,14 @@ export default {
       sanitize(str){
         return str.replace(/_/g, " ")
       }, 
-      copyToClipboard(val){
+      async copyToClipboard(val){
         const {onbuttonclick} = this
-        navigator.clipboard.writeText(val).then(() => {
+        try{
+          await navigator.clipboard.writeText(val);
           onbuttonclick({state: true, message: `Copied to clipboard.`})
-        }, (err) => {
+        } catch(err) {
           onbuttonclick({state: false, message: "Unable to copy to clipboard."})
-        });
+        }        
       },         
   }
   
@@ -55,7 +68,12 @@ export default {
     padding: 10px 10px 0px 10px;
 
     .item{
-      display: flex;            
+      display: flex;        
+      transition: 0.3s;
+      
+      &:hover{
+        color: blue;        
+      }
 
       &:not(:last-child){
         border-bottom: 1px dotted grey;
@@ -79,14 +97,20 @@ export default {
         display: flex;
         align-items: center;
         justify-content: flex-end;  
-        padding-right: 20px;      
+        padding-right: 20px; 
+        cursor: pointer;     
       }
 
       .copy-btn{
-        width: 50px;
+        width: auto;
         display: flex;
         align-items: center;
-        justify-content: center;        
+        justify-content: center;    
+        transition: 0.3s;
+        &:hover{
+          background: grey;
+          color: white;
+        }            
       }
     }
   }

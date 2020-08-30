@@ -4,13 +4,24 @@
     .button-container
       input(v-model='value' :placeholder='placeholder' v-bind:class="{ disabled: busy }" v-on:keyup.enter='onclick' @keyup='() => {onupdate(this.value)}')
       button.submit(:disabled='busy' v-on:click='onclick')
-        span(v-if='busy') Wait please
-        span(v-else) Submit
+        span {{busy ? buttonBusy : buttonActive}}        
 </template>
 
 <script>
 export default {
   props: {
+    buttonActive: {
+      type: String,
+      default: "Submit"
+    },
+    buttonBusy:{
+      type: String,
+      default: "Wait please"
+    },
+    label: {
+      type: String, 
+      default: "Enter a value"
+    },    
     defaultVal: {
       type: String,
       default: ""
@@ -18,10 +29,6 @@ export default {
     placeholder: {
       type: String, 
       default: ""
-    },
-    label: {
-      type: String, 
-      default: "Enter a value"
     },
     busy: {
       type: Boolean,
@@ -76,8 +83,14 @@ export default {
 
   button{
     border-radius: 0;
-    transform: translateY(-1px);
+    transform: translateY(0px);
+    transition: 0.3s;
     width: 200px;
+
+    &:hover{
+      background: grey;
+      color: white;
+    }       
 
     &:disabled{
       cursor: not-allowed;

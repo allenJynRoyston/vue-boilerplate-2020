@@ -7,7 +7,7 @@
 <style lang='scss' scoped>
   .footer{
     text-transform: uppercase;
-    font-size: 12px;
+    font-size: 10px;
     width: 100%;
     padding: 10px 0;
     display: flex;

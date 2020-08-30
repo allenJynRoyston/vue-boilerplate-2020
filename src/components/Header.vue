@@ -1,7 +1,18 @@
 <template lang='pug'>
   header.header
-    h1 URL Shortener Demo
+    h1 {{headerValue}}
 </template>
+
+<script>
+export default {
+  props: {
+    headerValue:{
+      type: String,
+      default: "Header"
+    }
+  }
+}
+</script>
 
 <style lang='scss' scoped>
   h1{
