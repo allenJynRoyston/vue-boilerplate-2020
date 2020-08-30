@@ -13,8 +13,13 @@
 
 <script>
 import axios from 'axios';
+import {SplitInput, ListResults} from '../components/_index'
 
 export default {
+  components: {
+    SplitInput, 
+    ListResults    
+  },  
   data () {    
     return {
       configuration: {
