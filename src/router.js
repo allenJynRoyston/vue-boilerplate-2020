@@ -3,7 +3,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 // import route components
-import {Home} from './routes/_index'
+import {Home, About, Contact} from './routes/_index'
 
 // set routes
 export default new Router({
@@ -12,7 +12,17 @@ export default new Router({
       path: '/',
       name: 'Home',
       component: Home
-    }      
+    },
+    {
+      path: '/about',
+      name: 'About',
+      component: About
+    },
+    {
+      path: '/contact',
+      name: 'Contact',
+      component: Contact
+    }          
   ]
 })
 

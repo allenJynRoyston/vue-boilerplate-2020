@@ -1,23 +1,27 @@
 <template lang='pug' >
   #app
-    Header(:data={value: "Url Shortening Demo!"})
-    router-view
+    Header(:data={value: "Vue Boilerplate 2020"})
+    SiteNav
+    Container      
+      router-view
     Footer
 </template>
 
 <script>
 import 'regenerator-runtime/runtime' // allows for async/await 
-import {Header, Footer} from './components/_index'
+import {Header, Footer, Container, SiteNav} from './components/_index'
 
 export default {
   components: {
     Header, 
-    Footer    
+    Footer, 
+    Container, 
+    SiteNav   
   }
 }
 </script>
 
 
-<style lang='scss' scoped>
-  @import './assets/css/global.css';
+<style lang='scss'>
+  @import './assets/css/global.scss';
 </style>
